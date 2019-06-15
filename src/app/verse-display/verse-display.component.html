@@ -1,0 +1,52 @@
+<ActionBar class="action-bar">
+    <NavigationButton (tap)="goBack()" android.systemIcon="ic_menu_back"></NavigationButton>
+    <Label class="action-bar-title" [text]="issueTitle"></Label>
+</ActionBar>
+
+
+<!--&lt;!&ndash;todo loading spinner&ndash;&gt;-->
+<!--&lt;!&ndash;<div *ngIf="loadedVerses.length === 0" class="loader"></div>&ndash;&gt;-->
+<!--<div *ngIf="displayVerses === true">-->
+<!--<div *ngFor="let object of loadedVerses">-->
+<!--<div>-->
+<!--<div style="color: #CA3932;">{{object.verseDetails}}</div>-->
+<!--<br>-->
+<!--<div>-->
+<!--<div *ngFor="let verse of object.verseApiData">-->
+<!--<span>-->
+<!--<strong>{{verse.verse}}  </strong>-->
+<!--<span [innerHtml]="verse.text"></span>-->
+<!--</span>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<StackLayout width="auto" height="auto">
+    <StackLayout orientation="horizontal" width="auto" height="100" backgroundColor="pink">
+        <Label  text="Issue Ttile" width="300" height="50" backgroundColor="red"></Label>
+        <Button *ngIf="loadedVerses.length > 0" [text]="verseData.verses.length + ' Verse (s)'"></Button>
+        <!--<Label text="Label 2" width="50" height="50" backgroundColor="green"></Label>-->
+    </StackLayout>
+
+    <!--a card the element that will be reused/repeated-->
+    <ListView [items]="loadedVerses" class="list-group">
+        <ng-template let-object="item">
+            <StackLayout orientation="vertical" width="auto" height="auto" backgroundColor="lightgray">
+                <Label [text]="object.verseDetails" width="350" height="30" backgroundColor="orange"></Label>
+                    <StackLayout width="auto" height="auto" *ngFor="let verse of object.verseApiData">
+                         <StackLayout width="auto" height="auto" backgroundColor="lightpink">
+                            <Label [text]="verse.verse"></Label>
+                             <HtmlView [html]="verse.text" ></HtmlView>
+                        </StackLayout>
+                    </StackLayout>
+                    <!--<HtmlView *ngFor="let verse of object.verseApiData" [html]="verse" ></HtmlView>-->
+                <!--<Label text="verse number and tex - will puyt in text view" width="350" height="100" backgroundColor="blue"></Label>-->
+            </StackLayout>
+        </ng-template>
+    </ListView>
+
+</StackLayout>
+
+
+
