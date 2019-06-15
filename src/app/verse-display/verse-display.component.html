@@ -33,7 +33,7 @@
     <ListView [items]="loadedVerses" class="list-group">
         <ng-template let-object="item">
             <StackLayout orientation="vertical" width="auto" height="auto" backgroundColor="lightgray">
-                <Label [text]="object.verseDetails" width="350" height="30" backgroundColor="orange"></Label>
+                <Label [text]="object.verseDetails" width="350" height="30" backgroundColor="brown"></Label>
                     <StackLayout width="auto" height="auto" *ngFor="let verse of object.verseApiData">
                          <StackLayout width="auto" height="auto" backgroundColor="lightpink">
                             <Label [text]="verse.verse"></Label>
