@@ -1,22 +1,11 @@
-<!--<ActionBar class="action-bar">-->
-    <!--<Label class="action-bar-title" text="Home"></Label>-->
-<!--</ActionBar>-->
-
-<!--<GridLayout class="page page-content">-->
-    <!--<ListView [items]="filteredVerses" class="list-group">-->
-        <!--<ng-template let-item="item">-->
-            <!--<Label [nsRouterLink]="['../item', item.verseID]" [text]="item.issue" class="list-group-item"></Label>-->
-        <!--</ng-template>-->
-    <!--</ListView>-->
-<!--</GridLayout>-->
 <ActionBar class="action-bar">
     <Label class="action-bar-title" text="Home"></Label>
 </ActionBar>
 
-<GridLayout class="page page-content">
-    <ListView [items]="filteredVerses" class="list-group">
-        <ng-template let-issue="item">
-            <Button (tap)="displayVerse(issue.verseID,issue.issue)" [text]="issue.issue"></Button>
-        </ng-template>
-    </ListView>
-</GridLayout>
+<ScrollView>
+    <FlexboxLayout flexwrap="wrap" width="auto" height="auto" alignItems="flex-start">
+        <Button textWrap="true" class="text-center text-capitalize btn btn-primary" width="auto" height="70"
+                *ngFor="let issue of filteredVerses" (tap)="displayVerse(issue.verseID,issue.issue)"
+                [text]="issue.issue"></Button>
+    </FlexboxLayout>
+</ScrollView>

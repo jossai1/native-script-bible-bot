@@ -66,9 +66,9 @@ export class VerseDisplayComponent implements OnInit {
                 .then(() => {
                     this.loadedVerses.push({verseApiData: verseAPIData, verseDetails: verse});
                     console.log(this.loadedVerses);
+                    this.displayVerses = true;
                 })
                 .catch((error) => this.error = error);
         }
-        this.displayVerses = true;
     }
 }
