@@ -1,6 +1,6 @@
 <ActionBar class="action-bar">
     <NavigationButton (tap)="goBack()" android.systemIcon="ic_menu_back"></NavigationButton>
-    <Label class="action-bar-title" [text]="issueTitle"></Label>
+    <Label textWrap="true" class="action-bar-title" [text]="issueTitle"></Label>
 </ActionBar>
 
 <StackLayout width="auto" height="auto">
@@ -13,21 +13,34 @@
 
     <!--details-->
     <StackLayout *ngIf="displayVerses === true">
-        <StackLayout orientation="horizontal" width="auto" height="100" backgroundColor="pink">
-            <Label text="Issue Ttile" width="300" height="50" backgroundColor="red"></Label>
-            <Button textWrap="true" class="text-center text-capitalize btn btn-primary  btn-rounded-lg"
+        <StackLayout orientation="horizontal" width="auto" height="auto">
+            <!--<Label text="Issue Ttile" width="300" height="50" backgroundColor="red"></Label>-->
+            <Button backgroundColor="#a5673f" textWrap="true"
+                    class="text-center text-capitalize btn btn-primary  btn-rounded-lg"
                     *ngIf="loadedVerses.length > 0" [text]="verseData.verses.length + ' Verse (s)'"></Button>
         </StackLayout>
 
         <!--a card the element that will be reused/repeated-->
-        <ListView [items]="loadedVerses" class="list-group">
+        <!--height here is recommended to be explicitly set - may need to make this fluid though as we may have a long list to scroll through //although, if it is longer then the set value then we need to think of a better ux of displaying this-->
+        <ListView class="list-group" [items]="loadedVerses" separatorColor="white" height="900">
             <ng-template let-object="item">
-                <StackLayout orientation="vertical" width="auto" height="auto" backgroundColor="lightgray">
-                    <Label [text]="object.verseDetails" width="350" height="30" backgroundColor="brown"></Label>
-                    <StackLayout width="auto" height="auto" *ngFor="let verse of object.verseApiData">
-                        <StackLayout width="auto" height="auto" backgroundColor="lightpink">
-                            <Label [text]="verse.verse"></Label>
-                            <HtmlView [html]="verse.text"></HtmlView>
+                <StackLayout class="list-group-item" style="border:1;" orientation="vertical" width="auto"
+                             height="auto">
+                    <StackLayout backgroundColor="white" class="card list-group-item">
+                        <Label style="font-weight: bold" class="list-group-item-heading" [text]="object.verseDetails"
+                               width="350" height="30" color="#CA3932"></Label>
+                        <StackLayout width="auto" height="auto" *ngFor="let verse of object.verseApiData">
+                            <!--<Label  textWrap="true" class="h3 text-left">-->
+                            <!--<FormattedString>-->
+                            <!--<Span [text]="verse.verse" color="#F96D52" fontAttributes="Bold"></Span>-->
+                            <!--<Span text=" "></Span>-->
+                            <!--<Span color="#F96D52" [text]="verse.text"></Span>-->
+                            <!--</FormattedString>-->
+                            <!--</Label>-->
+                            <!--<Label class="list-group-item-text" [text]="verse.verse"></Label>-->
+                            <!--<HtmlView class="h3 p-10 m-5 list-group-item-text" [html]="verse.verse + ' ' + verse.text"></HtmlView>-->
+                            <HtmlView class="h3 p-10 m-5 list-group-item-text"
+                                      [html]="prepareHtml(verse.verse, verse.text)"></HtmlView>
                         </StackLayout>
                     </StackLayout>
                 </StackLayout>

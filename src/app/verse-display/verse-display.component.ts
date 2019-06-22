@@ -3,13 +3,13 @@ import { BibleDataService } from "~/app/services/bible-data.service";
 import { SharedService } from "~/app/services/shared.service";
 import { ActivatedRoute } from "@angular/router";
 import { RouterExtensions } from "nativescript-angular/router";
-import { Issue } from "~/app/models/issue";
 import { BibleApiService } from "~/app/services/bible-api.service";
 
 @Component({
     selector: "VerseDisplay",
     moduleId: module.id,
     templateUrl: "./verse-display.component.html",
+    styleUrls: ["./verse-display.component.scss"],
     providers: [BibleApiService, BibleDataService]
 })
 export class VerseDisplayComponent implements OnInit {
@@ -37,8 +37,8 @@ export class VerseDisplayComponent implements OnInit {
         this.verseData = this.bibleDataService.fetchVerse(this.currentVerseID);
         this.issueData = this.bibleDataService.fetchIssueData(this.currentVerseID);
 
-        console.log(this.verseData);
-        console.log(this.issueData);
+        // console.log(this.verseData);
+        // console.log(this.issueData);
 
         if (this.verseData !== null && this.issueTitle !== null) {
             this.issueTitle = this.issueData.issue;
@@ -65,10 +65,16 @@ export class VerseDisplayComponent implements OnInit {
                 .then((data) => verseAPIData = data)
                 .then(() => {
                     this.loadedVerses.push({verseApiData: verseAPIData, verseDetails: verse});
-                    console.log(this.loadedVerses);
                     this.displayVerses = true;
                 })
                 .catch((error) => this.error = error);
         }
+    }
+
+    prepareHtml(verse, text): string {
+        const verseStr: string = "<span style='color: #F96D52'>" + verse + "</span>";
+        const textStr: string = "<span style='color: #F96D52'>" + text + "</span>";
+
+        return "<span>" + verseStr + " " + textStr + "</span>";
     }
 }
